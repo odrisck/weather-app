@@ -2,7 +2,7 @@ require 'sinatra'
 require 'yahoo_weatherman'
 
 def get_weather(location)
-	client = Weatherman::Client.new
+	client = Weatherman::Client.new(unit: "f")
 	weather = client.lookup_by_location(location)
 
 	
@@ -14,7 +14,6 @@ end
 
 post '/weather' do
 	location = params[:post]['location']
-
 	@condition = get_weather(location).condition['text']
 	@temp = get_weather(location).condition['temp']
 	
